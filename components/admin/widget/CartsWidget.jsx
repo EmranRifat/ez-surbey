@@ -1,32 +1,27 @@
-import totalEarn from "/public/static/images/icons/total-earn.svg";
-import memberImg from "/public/static/images/avatar/members-2.png";
-import TotalWidgetCard from "./TotalWidgetCard";
 import CartOne from "../carts/CartOne";
 import CartTwo from "../carts/CartTwo";
 import CartThree from "../carts/CartThree";
 import CartFour from "../carts/CartFour";
-import CartFive from "../carts/CartFive";
 import Cookies from "js-cookie";
-// import { useAllTransactiuonCount } from "lib/hooks/admin/transaction/fetchAllTransactionCount";
-import { useAllTransactionCount } from "lib/hooks/admin/transaction/fetchAllTransactionCount";
+import useAllCartDataCount from "lib/hooks/admin/home/fetchAllCartdataCount.js";
 
 function CartsWidget({ timeFrame }) {
   const token = Cookies.get("access");
-
+  console.log("tokennnnnn___>>>>", token);
   // console.log("timeFrame one===>>", timeFrame, token);
   function formatCurrentDate(date) {
     const currentDate = date;
-  
+
     const year = currentDate.getFullYear();
-    const month = String(currentDate.getMonth() + 1).padStart(2, "0"); 
+    const month = String(currentDate.getMonth() + 1).padStart(2, "0");
     const day = String(currentDate.getDate()).padStart(2, "0");
     const hours = String(currentDate.getHours()).padStart(2, "0");
     const minutes = String(currentDate.getMinutes()).padStart(2, "0");
     const seconds = String(currentDate.getSeconds()).padStart(2, "0");
-  
+
     return `${year}-${month}-${day} ${hours}:${minutes}:${seconds}`;
   }
-  
+
   let end_date = formatCurrentDate(new Date());
   let start_date = "2024-01-1 12:30:45";
 
@@ -56,80 +51,48 @@ function CartsWidget({ timeFrame }) {
     );
   }
 
-  const {
-    data: transactionCount_state,
-    isLoading: transactionCount_state_loading,
-    error: transactionCount_state_error,
-    isFetching: transactionCount_state_fetching,
-    refetch: refetch_transactionCount,
-  } = useAllTransactionCount(token, timeFrame,start_date, end_date);
-
-  // console.log("transactionCount_state///////------", transactionCount_state?.data);
+  // const {
+  //   isFetched: is_CartData_fetched,
+  //   data: CartData_state,
+  //   error: CartData_state_error,
+  //   isLoading: CartData_state_loading,
+  //   isFetching: CartData_state_fetching,
+  //   refetch: refetch_CartData,
+  // } = useAllCartDataCount(token);
 
   return (
     <div className="mb-[24px] w-full relative">
       <div className="grid grid-cols-1 gap-[10px] lg:grid-cols-5">
         <CartOne
-          transactionCount_state={transactionCount_state}
-          transactionCount_state_loading={transactionCount_state_loading}
-          transactionCount_state_fetching={transactionCount_state_fetching}
-          // className="bg-primary"
-          totalEarnImg={totalEarn}
-          memberImg={memberImg}
           timeFrame={timeFrame}
-          title="Total Issued"
+          title="Total Agents"
           amount="7,245.00"
           groth="+ 3.5%"
-          id="totalIssued"
+          id="totalAgents"
         />
-        <CartThree
-          transactionCount_state={transactionCount_state}
-          transactionCount_state_loading={transactionCount_state_loading}
-          transactionCount_state_fetching={transactionCount_state_fetching}
-          totalEarnImg={totalEarn}
-          timeFrame={timeFrame}
-          memberImg={memberImg}
-          title="Total Paid"
-          amount="5,245.00"
-          groth="+ 3.5%"
-          id="totalPaid"
-        />
-        <CartFive
-          transactionCount_state={transactionCount_state}
-          transactionCount_state_loading={transactionCount_state_loading}
-          transactionCount_state_fetching={transactionCount_state_fetching}
-          totalEarnImg={totalEarn}
-          memberImg={memberImg}
-          timeFrame={timeFrame}
-          title="Total UnPaid"
-          amount="275.00"
-          groth="+ 3.5%"
-          id="Total UnPaid"
-        />
+
         <CartTwo
-          transactionCount_state={transactionCount_state}
-          transactionCount_state_loading={transactionCount_state_loading}
-          transactionCount_state_fetching={transactionCount_state_fetching}
-          totalEarnImg={totalEarn}
-          memberImg={memberImg}
           timeFrame={timeFrame}
-          title="Total Charges"
+          title="Total Active Agent"
           amount="3,246.00"
           groth="+ 3.5%"
-          id="totalSpending"
+          id="totalActive"
+        />
+
+        <CartThree
+          timeFrame={timeFrame}
+          title="Total Shop"
+          amount="5,245.00"
+          groth="+ 3.5%"
+          id="totalShop"
         />
 
         <CartFour
-          transactionCount_state={transactionCount_state}
-          transactionCount_state_loading={transactionCount_state_loading}
-          transactionCount_state_fetching={transactionCount_state_fetching}
-          totalEarnImg={totalEarn}
-          memberImg={memberImg}
           timeFrame={timeFrame}
-          title="Total Transaction"
+          title="Total Visited Shop"
           amount="245.00"
           groth="+ 3.5%"
-          id="totalGoal"
+          id="totalvisited"
         />
       </div>
     </div>

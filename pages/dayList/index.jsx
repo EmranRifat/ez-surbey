@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import Search from "components/admin/forms/Search";
+import Search from "components/common/Search";
 import cookies from "js-cookie";
 import Layout from "components/layout";
 import AdminLayout from "components/admin/layout";
@@ -11,16 +11,25 @@ import {
 } from "@nextui-org/react";
 import DayListTable from "../../components/admin/Tables/DayListTable";
 import { useAllDayListData } from "../../lib/hooks/admin/transaction/fetchAllDayListData";
+import RangeCalendarComponent from "../../components/common/RangeCalender";
+import { parseDate } from "@internationalized/date"; 
 
 function DayList() {
   const [search, setSearch] = useState("");
-  const [date, setDate] = useState("");
   const [page, setPage] = useState(1);
-  const [pageSize, setPageSize] = useState(10);
+  const [pageSize, setPageSize] = useState(15);
   const [inputPage, setInputPage] = useState("");
   const [selectedValue, setSelectedValue] = useState("10");
   const [token, setToken] = useState(null);
   const [isClient, setIsClient] = useState(false);
+  const [formattedStartDate, setFormattedStartDate] = useState("19-11-2024");
+  const [formattedEndDate, setFormattedEndDate] = useState("25-11-2024");
+  const [dateRange, setDateRange] = useState({
+    start: parseDate("2024-04-01"),
+    end: parseDate("2024-04-08"),
+  });
+
+
 
   useEffect(() => {
     setIsClient(true);
@@ -30,7 +39,7 @@ function DayList() {
 
   
   const numbers = ["10", "20", "30", "40", "50", "60", "70", "80", "90", "100"];
-
+// console.log("dateRange >>>", formattedStartDate, formattedEndDate);
   const {
     isFetched: is_dayList_fetched,
     data: dayList_state,
@@ -38,15 +47,21 @@ function DayList() {
     isLoading: dayList_state_loading,
     isFetching: dayList_state_fetching,
     refetch: refetch_dayList,
-  } = useAllDayListData(token, search, page, pageSize);
+  } = useAllDayListData(token, search, page, pageSize, formattedStartDate, formattedEndDate);
 
   const dayListData = dayList_state?.data?.data;
   const current_page = dayList_state?.current_page;
 
+  const shouldShowPagination = !dayList_state_loading && (dayListData?.length > 0 ?? false);
+
+
   console.log("total pages >>>>", dayList_state?.data?.total_pages);
 
-  const handleGoToPage = () => {
 
+
+
+
+  const handleGoToPage = () => {
     const pageNumber = parseInt(inputPage, 10);
     if (
       !isNaN(pageNumber) &&
@@ -74,11 +89,37 @@ function DayList() {
     refetch_dayList();
   };
 
+
+  const handleDateChange = (newRange) => {
+    setDateRange(newRange);
+    if (newRange.start && newRange.end) {
+      const formatDate = (date) => {
+        const year = date.year;
+        const month = String(date.month).padStart(2, '0');
+        const day = String(date.day).padStart(2, '0');
+        return `${day}-${month}-${year}`;
+      };
+      const startDate = formatDate(newRange.start);
+      const endDate = formatDate(newRange.end);
+      // console.log(`start_date: ${startDate}, end_date: ${endDate}`);
+      setFormattedStartDate(startDate);
+      setFormattedEndDate(endDate);
+      setPage(1);
+      refetch_dayList();
+    }
+
+  };
+
+
+
+
   return (
     <div className="w-full rounded-lg bg-white mb-8 dark:bg-darkblack-600 p-8 mt-4">
       <p className="text-gray-400 pb-3 font-semibold">Start Day List :</p>
       <div className="flex flex-col space-y-5">
-        <div className="flex h-[56px] justify-between space-x-4 mt-2">
+
+      <div className="flex space-x-4">
+          <RangeCalendarComponent value={dateRange} onChange={handleDateChange} />
           <Search search={search} setSearch={setSearch} />
         </div>
 
@@ -101,8 +142,9 @@ function DayList() {
             <div className="h-10 bg-gray-200 dark:bg-gray-700 animate-pulse" />
           )}
         </div>
-
-        <div className="mt-6">
+{
+  shouldShowPagination && (
+<div className="mt-6">
           <div className="flex flex-col md:flex-row justify-between items-center gap-4 md:gap-6">
             {/* Left-aligned controls */}
             <div className="flex justify-start items-start gap-4">
@@ -213,6 +255,9 @@ function DayList() {
             </div>
           </div>
         </div>
+  )
+}
+        
       </div>
     </div>
   );

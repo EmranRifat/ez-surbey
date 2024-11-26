@@ -1,4 +1,3 @@
-
 import { useContext, useState } from "react";
 import SearchBar from "../forms/SearchBar";
 import Author from "./Author";
@@ -45,39 +44,26 @@ function HeaderOne({ handleSidebar, showToggleButton }) {
     setPopup({ ...popup, [name]: !popup[name] });
   };
 
-
-
   const handleLogout = async () => {
-    
-      router.push("/login");
-      Cookies.remove("access");
-      Cookies.remove("refresh");
-
-    
+    router.push("/login");
+    Cookies.remove("access");
+    Cookies.remove("refresh");
   };
 
-
   const goToSettings = async () => {
-      router.push("/admin/settings");
-    
+    router.push("/admin/settings");
   };
 
   return (
-    <header className="header-wrapper z-30 hidden w-full md:block bg-[#C41C22]">
+    <header className="header-wrapper z-30 hidden w-full md:block bg-[#218d9e]">
       <div className=" flex  h-[70px] w-full justify-between items-center sticky  px-10 dark:bg-darkblack-400 2xl:px-[76px]">
-    <div className="flex gap-4">
-    <Link href="/">
-          <Image
-            width={36}
-            height={36}
-            src="/Logo.svg"
-            alt="logo"
-          />
-        </Link>
-     <h1 className="mt-2 ">ezSurvey-Dashboard</h1>
-    </div>
-      
-      
+        <div className="flex gap-4">
+          <Link href="/">
+            <Image width={36} height={36} src="/Logo.svg" alt="logo" />
+          </Link>
+          <h1 className="mt-2 font-semibold ">ezSurvey-Dashboard</h1>
+        </div>
+
         {/* <Link href="/">
           <Image
             width={110}
@@ -86,8 +72,6 @@ function HeaderOne({ handleSidebar, showToggleButton }) {
             alt="logo"
           />
         </Link> */}
-
-
 
         {/* page-title */}
         {/* <div className="">
@@ -102,12 +86,7 @@ function HeaderOne({ handleSidebar, showToggleButton }) {
         {/* <SearchBar /> */}
 
         {/* quick access */}
-       
 
-      
-      
-      
-      
         <div className="quick-access-wrapper relative ">
           <div className="flex items-center space-x-[43px]">
             <div className="hidden h-[48px] w-[1px] bg-bgray-300 dark:bg-darkblack-400"></div>
@@ -119,7 +98,7 @@ function HeaderOne({ handleSidebar, showToggleButton }) {
 
             <div className="hidden items-center  xl:flex w-400">
               <ModeToggler />
-             
+
               <ToggleBtn
                 name="notification"
                 clickHandler={handlePopup}
@@ -139,9 +118,7 @@ function HeaderOne({ handleSidebar, showToggleButton }) {
             </div>
 
             <div className="flex gap-2">
-              <p className="text-white mt-1 text-sm ">
-                {user?.userName} 
-              </p>
+              <p className="text-white mt-1 text-sm ">{user?.userName}</p>
 
               <Dropdown
                 className="bg-white shadow-lg outline-none rounded-lg"
@@ -155,7 +132,6 @@ function HeaderOne({ handleSidebar, showToggleButton }) {
                     color="accent"
                     name={user.userType}
                     size="sm"
-                   
                   />
                 </DropdownTrigger>
 
@@ -198,6 +174,5 @@ function HeaderOne({ handleSidebar, showToggleButton }) {
     </header>
   );
 }
-
 
 export default HeaderOne;

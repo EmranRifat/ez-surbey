@@ -85,6 +85,7 @@ module.exports = {
           100: "#FFC837",
           500: "#F6A723",
         },
+
         purple: "#936DFF",
         primaryNew: "#B7FFD1",
         primary: "#22C55E",
@@ -109,6 +110,7 @@ module.exports = {
           700: "#2A313C",
           900: "#1A202C",
         },
+        // blue:"#0000FF",
         othersTeal: "#2DD4BF",
         othersOrange: "#FF784B",
         basicSecondary: "#1A202C",

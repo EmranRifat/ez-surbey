@@ -33,12 +33,13 @@ export const sectionItemsWithTeams = [
     title: "Start of Day List",
     href: "/dayList",
     icon: (
-      <Icon
-        icon="solar:users-group-two-rounded-outline"
-        width={20}
-        height={20}
+      <Image
+        src="/icons/calender.svg"
+        alt="daylist"
+        width="20"
+        height="20"
       />
-    ), 
+    ),
   },
   {
     key: "agents",
@@ -49,6 +50,19 @@ export const sectionItemsWithTeams = [
         icon="solar:users-group-two-rounded-outline"
         width={20}
         height={20}
+      />
+    ),
+  },
+  {
+    key: "inventory",
+    title: "Inventory",
+    href: "/inventory",
+    icon: (
+      <Image
+        src="/icons/inventory.svg"
+        alt="Dashboard"
+        width="20"
+        height="20"
       />
     ),
   },

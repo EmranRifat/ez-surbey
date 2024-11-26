@@ -1,91 +1,94 @@
-import React from 'react';
+import React, { useState } from 'react';
 import ReactApexChart from 'react-apexcharts';
 
 const HomeBarChart = () => {
-  const series = [
-    {
-      name: 'PRODUCT A',
-      data: [44, 55, 41, 67, 22, 43],
-    },
-    {
-      name: 'PRODUCT B',
-      data: [13, 23, 20, 8, 13, 27],
-    },
-    {
-      name: 'PRODUCT C',
-      data: [11, 17, 15, 15, 21, 14],
-    },
-    {
-      name: 'PRODUCT D',
-      data: [21, 7, 25, 13, 22, 8],
-    },
-  ];
 
-  const options = {
-    chart: {
-      type: 'bar',
-      height: 350,
-      stacked: true,
-      toolbar: {
-        show: true,
-      },
-      zoom: {
-        enabled: true,
-      },
-    },
-    responsive: [
-      {
-        breakpoint: 480,
-        options: {
-          legend: {
-            position: 'bottom',
-            offsetX: -10,
+  
+  const [chartData, setChartData] = useState({
+    series: [{
+      name: 'Servings',
+      data: [44, 55, 41, 67, 22, 43, 21, 33, 45, 31, 87, 65, 35],
+    }],
+    options: {
+      annotations: {
+        points: [{
+          x: 'Bananas',
+          seriesIndex: 0,
+          label: {
+            borderColor: '#775DD0',
             offsetY: 0,
-          },
-        },
-      },
-    ],
-    plotOptions: {
-      bar: {
-        horizontal: false,
-        borderRadius: 10,
-        borderRadiusApplication: 'end', // 'around', 'end'
-        borderRadiusWhenStacked: 'last', // 'all', 'last'
-        dataLabels: {
-          total: {
-            enabled: true,
             style: {
-              fontSize: '13px',
-              fontWeight: 900,
+              color: '#fff',
+              background: '#775DD0',
             },
+            text: 'Bananas are good',
           },
+        }],
+      },
+      chart: {
+        height: 350,
+        type: 'bar',
+      },
+      plotOptions: {
+        bar: {
+          borderRadius: 10,
+          columnWidth: '50%',
+        },
+      },
+      dataLabels: {
+        enabled: false,
+      },
+      stroke: {
+        width: 0,
+      },
+      grid: {
+        row: {
+          colors: ['#fff', '#f2f2f2'],
+        },
+      },
+
+      xaxis: {
+        labels: {
+          rotate: -45,
+        },
+        categories: [
+          'Apples', 'Oranges', 'Strawberries', 'Pineapples', 'Mangoes', 'Bananas',
+          'Blackberries', 'Pears', 'Watermelons', 'Cherries', 'Pomegranates', 'Tangerines', 'Papayas',
+        ],
+        tickPlacement: 'on',
+      },
+      yaxis: {
+        title: {
+          text: 'Servings',
+        },
+      },
+
+      fill: {
+        type: 'gradient',
+        gradient: {
+          shade: 'light',
+          type: 'horizontal',
+          shadeIntensity: 0.25,
+          gradientToColors: undefined,
+          inverseColors: true,
+          opacityFrom: 0.85,
+          opacityTo: 0.85,
+          stops: [50, 0, 100],
         },
       },
     },
-    xaxis: {
-      type: 'datetime',
-      categories: [
-        '01/01/2011 GMT',
-        '01/02/2011 GMT',
-        '01/03/2011 GMT',
-        '01/04/2011 GMT',
-        '01/05/2011 GMT',
-        '01/06/2011 GMT',
-      ],
-    },
-    legend: {
-      position: 'right',
-      offsetY: 40,
-    },
-    fill: {
-      opacity: 1,
-    },
-  };
+  });
 
   return (
     <div>
-      <div className='shadow-lg' id="chart">
-        <ReactApexChart options={options} series={series} type="bar" width={1400} height={350} />
+      <div className='shadow-lg rounded-lg mt-6' id="chart">
+        <ReactApexChart
+          options={chartData.options}
+          series={chartData.series}
+          type="bar"
+          height={350}
+          width={900}
+        />
       </div>
       <div id="html-dist"></div>
     </div>

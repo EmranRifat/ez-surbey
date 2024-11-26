@@ -8,8 +8,8 @@ import cookies from "js-cookie";
 
 function AdminLayout({ bg, overlay, children }) {
   const [sidebarVisible, setSidebarVisible] = useState(true);
-  const [isLoading, setIsLoading] = useState(true); // Loading state
-  const router = useRouter(); // Initialize useRouter
+  const [isLoading, setIsLoading] = useState(true);
+  const router = useRouter();
 
   // Initialize sidebar visibility based on localStorage
   useEffect(() => {
@@ -31,9 +31,9 @@ function AdminLayout({ bg, overlay, children }) {
   useEffect(() => {
     const accessToken = cookies.get("access");
     if (!accessToken) {
-      router.replace("/login"); // Redirect to login if no token
+      router.replace("/login");
     } else {
-      setIsLoading(false); // Token exists, proceed to load the layout
+      setIsLoading(false);
     }
   }, [router]);
 
@@ -48,8 +48,11 @@ function AdminLayout({ bg, overlay, children }) {
 
   return (
     <Provider>
-      <HeaderOne handleSidebar={handleSidebarToggle} showToggleButton={!sidebarVisible} />
-      <div className="layout-wrapper flex w-full dark:bg-darkblack-500 bg-[#FAFAFA]">
+      <HeaderOne
+        handleSidebar={handleSidebarToggle}
+        showToggleButton={!sidebarVisible}
+      />
+      <div className="layout-wrapper flex w-full dark:bg-darkblack-500 bg-[#F4F4F5]">
         {/* Sidebar Section */}
         <div className={`${sidebarVisible ? "block" : "hidden"} sm:block`}>
           <CustomSidebar isCollapsed={!sidebarVisible} />
@@ -64,7 +67,11 @@ function AdminLayout({ bg, overlay, children }) {
           {overlay ? overlay : <Overlay />}
 
           {/* Dashboard Content */}
-          <div className={`body-wrapper ${bg || "dark:bg-darkblack-500 bg-[#FAFAFA]"}`}>
+          <div
+            className={`body-wrapper ${
+              bg || "dark:bg-darkblack-500 bg-[#FAFAFA]"
+            }`}
+          >
             {children}
           </div>
         </div>
