@@ -14,23 +14,16 @@ import {
 } from "@nextui-org/react";
 import Layout from "components/layout";
 import AdminLayout from "components/admin/layout";
-import {usePathname} from "next/navigation";
 import PersonTable from "../../components/admin/Tables/PersonTable";
 import ItemsTable from "../../components/admin/Tables/ItemTable";
 
-const numbers = ["10", "20", "30", "40", "50", "60", "70", "80", "90", "100"];
 
 function Inventory() {
   
-
   const token = cookies.get("access");
-
   const [search, setSearch] = useState("");
-
-  function ExampleClientRouterWithTabs() {
-    const pathname = usePathname();
-  }
-
+ 
+  
 
   return (
 
@@ -45,11 +38,11 @@ function Inventory() {
           />
         </div>
         <div className="flex w-full flex-col px-4">
-      <Tabs aria-label="Options">
-        <Tab  key="person" title="Person">
-          <Card>
-            <CardBody>
-             <PersonTable/>
+      <Tabs  aria-label="Options">
+        <Tab className="shadow-none outline-none" key="persons" title="Persons">
+          <Card  className="shadow-none -mx-5">
+            <CardBody >
+             <PersonTable search={search}/>
             </CardBody>
           </Card>  
         </Tab>
