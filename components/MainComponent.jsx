@@ -23,7 +23,7 @@ const MainComponent = () => {
     <main className="w-full px-4 pb-6 sm:pt-10 lg:pt-14 xl:px-8 xl:pb-12">
       <div className="flex flex-col sm:flex-row sm:items-center gap-2 pb-4 px-1">
         <h2 className="text-gray-600 text-lg sm:text-xl">At A Glance</h2>
-        <Dropdown>
+        {/* <Dropdown>
           <DropdownTrigger>
             <Button
               size="sm"
@@ -81,7 +81,7 @@ const MainComponent = () => {
               Yearly
             </DropdownItem>
           </DropdownMenu>
-        </Dropdown>
+        </Dropdown> */}
       </div>
 
       <div className="2xl:flex 2xl:space-x-12 relative">

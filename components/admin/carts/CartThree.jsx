@@ -5,14 +5,7 @@ import { Spinner } from "@nextui-org/react";
 
 function CartThree({
   title,
-  amount,
-  groth,
-  memberImg,
-  totalEarnImg,
-  timeFrame,
-  transactionCount_state,
-  transactionCount_state_loading,
-  transactionCount_state_fetching,
+  totalShops,
 }) {
 
 
@@ -20,7 +13,7 @@ function CartThree({
 
 
   return (
-    <div className="rounded-lg p-5 shadow-lg bg-gradient-to-b bg-[#17A2B8] dark:bg-darkblack-600">
+    <div className="rounded-lg p-5 shadow-lg bg-gradient-to-b md:w-64 md:ml-20  bg-[#17A2B8] dark:bg-darkblack-600">
       <div className="mb-5  flex items-center justify-between">
         <div className="flex items-center space-x-[7px]">
           <div className="icon">
@@ -51,9 +44,9 @@ function CartThree({
       <div className="flex items-end justify-between">
         <div className="flex-1">
           <div className=" ">
-            <div className="text-3xl font-bold leading-[48px] ml-4 text-white
+            <div className="text-3xl  font-bold leading-[48px] ml-20 text-white
              dark:text-white  flex">
-             0.000
+            {totalShops||"00"}
             
             </div>
           </div>

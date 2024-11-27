@@ -13,7 +13,7 @@ import { useAllInventoryPerson } from "../../../lib/hooks/admin/inventory/fetchI
 function PersonTable({search}) {
   const [page, setPage] = useState(1);
   const [pageSize, setPageSize] = useState(15);
-  const [selectedValue, setSelectedValue] = useState("10");
+  const [selectedValue, setSelectedValue] = useState(pageSize.toString());
   const [inputPage, setInputPage] = useState("");
 
   const token = cookies.get("access");
@@ -101,7 +101,7 @@ function PersonTable({search}) {
               className="py-2 px-4  border border-gray-300 dark:border-gray-600"
               rowSpan="2"
             >
-              User Name
+              Agent
             </th>
             <th
               scope="col"
@@ -163,6 +163,7 @@ function PersonTable({search}) {
           {/* Subheader row for P, U, B */}
           <tr className="border-b bg-[#218d9ead] text-center border-gray-400 dark:border-gray-600">
             {[...Array(8)].map((_, index) => (
+              // console.log("index===>  ", index),
               <>
                 <th
                   key={`P-${index}`}
@@ -196,11 +197,11 @@ function PersonTable({search}) {
               const rowIndex = (page - 1) * pageSize + index + 1;
               return (
                 <tr
-                  key={index}
+                  key={rowIndex}
                   className={`hover:bg-gray-200 dark:hover:bg-gray-600 cursor-pointer ${
                     index % 2 === 0
-                      ? "bg-gray-100 dark:bg-gray-800"
-                      : "bg-white dark:bg-gray-900"
+                      ? "bg-white dark:bg-gray-800"
+                      : "bg-gray-100 dark:bg-gray-900"
                   }`}
                 >
                   <td className="py-2 px-1 text-center font-medium  text-gray-900 dark:text-gray-200">
@@ -290,7 +291,7 @@ function PersonTable({search}) {
                 colSpan="40"
                 className="text-center py-1 px-3 text-nowrap font-semibold"
               >
-                No Persons data found.
+                No Persons data found..!
               </td>
             </tr>
           )}

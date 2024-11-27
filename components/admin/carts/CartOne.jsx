@@ -3,24 +3,14 @@ import Cookies from "js-cookie";
 import { Spinner } from "@nextui-org/react";
 
 
-function CartOne({
-  title,
-  amount,
-  groth,
-  memberImg,
-  totalEarnImg,
-  timeFrame,
-  transactionCount_state,
-  transactionCount_state_loading,
-  transactionCount_state_fetching,
-}) {
+function CartOne({totalAgents,title}) {
 
 
 
 
 
   return (
-    <div className="rounded-lg p-5 shadow-lg bg-gradient-to-b bg-[#00CCCC] dark:bg-darkblack-600">
+    <div className="rounded-lg p-5 shadow-lg bg-gradient-to-b md:w-64 bg-[#00CCCC] dark:bg-darkblack-600">
       <div className="mb-5  flex items-center justify-between">
         <div className="flex items-center space-x-[7px]">
           <div className="icon">
@@ -51,9 +41,9 @@ function CartOne({
       <div className="flex items-end justify-between">
         <div className="flex-1">
           <div className=" ">
-            <div className="text-3xl font-bold leading-[48px] ml-4 text-white
+            <div className="text-2xl font-bold leading-[48px] ml-20 text-white
              dark:text-white  flex">
-             0.000
+             {totalAgents}
             </div>
           </div>
 

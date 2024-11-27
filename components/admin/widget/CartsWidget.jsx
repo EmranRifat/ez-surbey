@@ -3,12 +3,11 @@ import CartTwo from "../carts/CartTwo";
 import CartThree from "../carts/CartThree";
 import CartFour from "../carts/CartFour";
 import Cookies from "js-cookie";
-import useAllCartDataCount from "lib/hooks/admin/home/fetchAllCartdataCount.js";
+import { useAllCartdataCount } from "../../../lib/hooks/admin/dash/fetchCartValues";
 
 function CartsWidget({ timeFrame }) {
   const token = Cookies.get("access");
-  console.log("tokennnnnn___>>>>", token);
-  // console.log("timeFrame one===>>", timeFrame, token);
+
   function formatCurrentDate(date) {
     const currentDate = date;
 
@@ -51,19 +50,27 @@ function CartsWidget({ timeFrame }) {
     );
   }
 
-  // const {
-  //   isFetched: is_CartData_fetched,
-  //   data: CartData_state,
-  //   error: CartData_state_error,
-  //   isLoading: CartData_state_loading,
-  //   isFetching: CartData_state_fetching,
-  //   refetch: refetch_CartData,
-  // } = useAllCartDataCount(token);
+  const {
+    isFetched: is_CartData_fetched,
+    data: CartData_state,
+    error: CartData_state_error,
+    isLoading: CartData_state_loading,
+    isFetching: CartData_state_fetching,
+    refetch: refetch_CartData,
+  } = useAllCartdataCount(token);
 
+    const cartData = CartData_state?.data?.data;
+    console.log("CartData_state table--->>", cartData);
+    const totalAgents = cartData?.total_agent;
+    const totalShops = cartData?.total_shop;
   return (
+    
     <div className="mb-[24px] w-full relative">
+
       <div className="grid grid-cols-1 gap-[10px] lg:grid-cols-5">
+     
         <CartOne
+        totalAgents={totalAgents}
           timeFrame={timeFrame}
           title="Total Agents"
           amount="7,245.00"
@@ -72,6 +79,7 @@ function CartsWidget({ timeFrame }) {
         />
 
         <CartTwo
+          cartData={cartData}
           timeFrame={timeFrame}
           title="Total Active Agent"
           amount="3,246.00"
@@ -80,6 +88,7 @@ function CartsWidget({ timeFrame }) {
         />
 
         <CartThree
+        totalShops={totalShops}
           timeFrame={timeFrame}
           title="Total Shop"
           amount="5,245.00"
@@ -88,6 +97,8 @@ function CartsWidget({ timeFrame }) {
         />
 
         <CartFour
+        
+          cartData={cartData}
           timeFrame={timeFrame}
           title="Total Visited Shop"
           amount="245.00"

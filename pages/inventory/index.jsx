@@ -2,15 +2,10 @@ import { useEffect, useState } from "react";
 import cookies from "js-cookie";
 import UserFilter from "components/admin/forms/UserFilter";
 import {
-  Autocomplete,
-  AutocompleteItem,
-  Button,
   Card,
   CardBody,
-  Pagination,
   Tab,
   Tabs,
-  useDisclosure,
 } from "@nextui-org/react";
 import Layout from "components/layout";
 import AdminLayout from "components/admin/layout";
@@ -46,8 +41,8 @@ function Inventory() {
             </CardBody>
           </Card>  
         </Tab>
-        <Tab key="item" title="Items">
-          <Card>
+        <Tab  key="item" title="Items">
+          <Card className="shadow-none -mx-5">
             <CardBody>
              <ItemsTable/>
             </CardBody>
