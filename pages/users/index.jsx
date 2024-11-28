@@ -1,8 +1,7 @@
 import { useEffect, useState } from "react";
 import cookies from "js-cookie";
 import UserFilter from "components/admin/forms/UserFilter";
-import UsersList from "components/admin/user/UsersList";
-import OnboardPostMasterTable from "components/admin/Tables/OnboardUserTable";
+import OnboardPostMasterTable from "components/admin/Tables/UsersListTable";
 import {
   Autocomplete,
   AutocompleteItem,
@@ -13,14 +12,13 @@ import {
 import Layout from "components/layout";
 import AdminLayout from "components/admin/layout";
 import { useAllUsersData } from "lib/hooks/admin/users/useAllUsersData";
-import { ToastContainer } from "react-toastify";
 
 const numbers = ["10", "20", "30", "40", "50", "60", "70", "80", "90", "100"];
 
 function Users() {
   
   const [page, setPage] = useState(1);
-  const [pageSize, setPageSize] = useState(10);
+  const [pageSize, setPageSize] = useState(15);
   const token = cookies.get("access");
   const [inputPage, setInputPage] = useState("");
   const [selectedValue, setSelectedValue] = useState("10");
@@ -28,17 +26,17 @@ function Users() {
   const { isOpen, onOpenChange } = useDisclosure();
 
   const {
-    data: onboardUsers_state,
-    isLoading: onboardUsers_state_loading,
-    error: onboardUsers_state_error,
-    isFetching: onboardUsers_state_fetching,
-    refetch: refetch_onboardUsers,
+    data: Users_state,
+    isLoading:Users_state_loading,
+    error: Users_state_error,
+    isFetching: Users_state_fetching,
+    refetch: refetch_Users,
 
   } = useAllUsersData(token, search, page, pageSize);
 
-  // console.log("onboardUsers_state !!!!!!!!!!!", onboardUsers_state?.data?.data);
+  console.log("Users_state !!!!!!!!!!!", Users_state?.data?.data);
 
-  const current_page = onboardUsers_state?.data?.current_page;
+  const current_page = Users_state?.data?.current_page;
   const handleInputPageChange = (e) => {
     setInputPage(e.target.value);
   };
@@ -48,7 +46,7 @@ function Users() {
     if (
       !isNaN(pageNumber) &&
       pageNumber > 0 &&
-      pageNumber <= onboardUsers_state?.data?.total_pages
+      pageNumber <= Users_state?.data?.total_pages
     ) {
       setCurrentPage(pageNumber);
     }
@@ -62,16 +60,16 @@ function Users() {
 
   const setCurrentPage = (page_number) => {
     setPage(page_number);
-    refetch_onboardUsers();
+    refetch_Users();
   };
 
-  const shouldShowPagination = !onboardUsers_state_loading && (onboardUsers_state?.data?.data?.length > 0 ?? false);
+  const shouldShowPagination = !Users_state_loading && (Users_state?.data?.data?.length > 0 ?? false);
 
   
   
     useEffect(() => {
-    refetch_onboardUsers();
-  }, [page, pageSize, refetch_onboardUsers]);
+    refetch_Users();
+  }, [page, pageSize, refetch_Users]);
   return (
     <div className="w-full rounded-lg mt-6 bg-white dark:bg-darkblack-600 ">
       <div>
@@ -79,7 +77,7 @@ function Users() {
           <UserFilter
             search={search}
             setSearch={setSearch}
-            refetch={refetch_onboardUsers}
+            refetch={refetch_Users}
           />
         </div>
 
@@ -87,16 +85,16 @@ function Users() {
           <OnboardPostMasterTable
             onOpenChange={onOpenChange}
             isOpen={isOpen}
-            onboardUsers_state={onboardUsers_state?.data}
-            isLoading={onboardUsers_state_loading}
-            error={onboardUsers_state_error}
+            Users_state={Users_state?.data}
+            isLoading={Users_state_loading}
+            error={Users_state_error}
             setPage={setPage}
             page={page}
             pageSize={pageSize}
             currentPage={current_page}
             setPageSize={setPageSize}
-            refetch={refetch_onboardUsers}
-            isFetching={onboardUsers_state_fetching}
+            refetch={refetch_Users}
+            isFetching={Users_state_fetching}
           />
         </div>
       </div>

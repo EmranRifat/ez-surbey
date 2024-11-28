@@ -16,10 +16,11 @@ import RangeCalendarComponent from "../../components/common/RangeCalender";
 import { parseDate } from "@internationalized/date";
 
 function ShopData() {
+  const token = cookies.get("access");
   const [search, setSearch] = useState("");
 
   const [dateRange, setDateRange] = useState({
-    start: parseDate("2024-04-01"),
+    start: parseDate("2024-01-01"),
     end: parseDate("2024-04-08"),
   });
 
@@ -30,14 +31,7 @@ function ShopData() {
   const [selectedValue, setSelectedValue] = useState("10");
   const [page, setPage] = useState(1);
   const [pageSize, setPageSize] = useState(15);
-  const [token, setToken] = useState(null);
   const [isClient, setIsClient] = useState(false);
-
-  useEffect(() => {
-    setIsClient(true);
-    const accessToken = cookies.get("access");
-    setToken(accessToken);
-  }, []);
 
   const numbers = ["10", "20", "30", "40", "50", "60", "70", "80", "90", "100"];
 
@@ -64,7 +58,7 @@ function ShopData() {
     !shopData_state_loading &&
     (shopData_state?.data?.data?.length > 0 ?? false);
 
-  console.log("shopData table LLL>>>", shopData_state?.data);
+  console.log("shopData table ===>>>", shopData_state?.data);
 
   const handleInputPageChange = (e) => {
     setInputPage(e.target.value);
@@ -126,25 +120,18 @@ function ShopData() {
           <Search search={search} setSearch={setSearch} />
         </div>
 
-        <div className="dark:bg-darkblack-600 dark:text-gray-400">
-          {isClient && token ? (
-            <ShopDataTable
-              ShopData={shopData}
-              isLoading={shopData_state_error || shopData_state_fetching}
-              loop
-              showControls
-              search={search}
-              page={page}
-              pageSize={pageSize}
-              error={shopData_state_error}
-              currentPage={current_page}
-            />
-          ) : isClient ? (
-            <p className="text-red-500">No access token found.</p>
-          ) : (
-            // Render a placeholder that matches the server HTML
-            <div className="h-10 bg-gray-200 dark:bg-gray-700 animate-pulse" />
-          )}
+        <div className="dark:bg-darkblack-600 dark:text-gray-400 mb-6">
+          <ShopDataTable
+            ShopData={shopData}
+            isLoading={shopData_state_error || shopData_state_fetching}
+            loop
+            showControls
+            search={search}
+            page={page}
+            pageSize={pageSize}
+            error={shopData_state_error}
+            currentPage={current_page}
+          />
         </div>
 
         {shouldShowPagination && (
@@ -268,7 +255,6 @@ function ShopData() {
             </div>
           </div>
         )}
-
       </div>
     </div>
   );

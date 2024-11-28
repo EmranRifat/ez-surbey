@@ -9,13 +9,10 @@ import {
 } from "@nextui-org/react";
 import Layout from "components/layout";
 import AdminLayout from "components/admin/layout";
-import PersonTable from "../../components/admin/Tables/PersonTable";
 import ItemsTable from "../../components/admin/Tables/ItemTable";
-
-
+import Person_merge from "../../components/admin/inventory_merge/person_merge";
 function Inventory() {
   
-  const token = cookies.get("access");
   const [search, setSearch] = useState("");
  
   
@@ -37,7 +34,7 @@ function Inventory() {
         <Tab className="shadow-none outline-none" key="persons" title="Persons">
           <Card  className="shadow-none -mx-5">
             <CardBody >
-             <PersonTable search={search}/>
+             <Person_merge search={search}/>
             </CardBody>
           </Card>  
         </Tab>

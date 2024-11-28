@@ -1,8 +1,15 @@
 import { Spinner } from "@nextui-org/react";
 import Image from "next/image";
-
+import { useRouter } from 'next/router';  
 function ShopDataTable({ ShopData, isLoading, error, page, pageSize }) {
   console.log("table ShopData===>", ShopData);
+  
+
+
+  const handleRowClick = (shopId) => {
+    window.open(`shopData/${shopId}`);
+    
+  };
 
   if (isLoading) {
     return (
@@ -152,11 +159,13 @@ function ShopDataTable({ ShopData, isLoading, error, page, pageSize }) {
           <tbody className="bg-white dark:bg-darkblack-600 text-gray-700 dark:text-white">
             {hasShopData ? (
               ShopData.map((shop, index) => {
+                console.log("shopUser.....>>>",shop)
                 const rowIndex = (page - 1) * pageSize + index + 1;
                 return (
                   <tr
                     key={shop.id || index}
-                    className="hover:bg-gray-200 cursor-pointer"
+                    className="hover:bg-blue-200 cursor-pointer"
+                    onClick={() => handleRowClick(shop.id)}  
                   >
                     <td className="py-1 px-3 text-nowrap">{rowIndex}</td>
                     <td className="py-1 px-3 text-nowrap">

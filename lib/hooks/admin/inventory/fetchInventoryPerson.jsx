@@ -1,6 +1,6 @@
 import { useQuery } from "@tanstack/react-query";
 
-const getAllInventoryPerson = async (token, page , pageSize , search ) => {
+const getAllInventoryPerson = async (token, page, pageSize, search) => {
   let url = `${process.env.NEXT_PUBLIC_API_URL}/submissions/inventory-user-based/`;
 
   const params = new URLSearchParams();
@@ -60,6 +60,5 @@ export const useAllInventoryPerson = (token, page, pageSize, search) => {
   return useQuery({
     queryKey: ["get_All_Inventory_Person", token, page, pageSize, search],
     queryFn: () => getAllInventoryPerson(token, page, pageSize, search),
-   
   });
 };

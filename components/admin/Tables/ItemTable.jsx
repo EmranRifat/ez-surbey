@@ -10,7 +10,6 @@ import { useAllInventoryItems } from "lib/hooks/admin/inventory/fetchInventoryIt
 import cookies from "js-cookie";
 
 function ItemsTable({ search }) {
-
   const [page, setPage] = useState(1);
   const [pageSize, setPageSize] = useState(15);
   const [inputPage, setInputPage] = useState("");
@@ -41,7 +40,10 @@ function ItemsTable({ search }) {
   }
 
   // Handle empty or no data case
-  if (!Array.isArray(itemsData_state?.data?.data) || itemsData_state.data?.data.length === 0) {
+  if (
+    !Array.isArray(itemsData_state?.data?.data) ||
+    itemsData_state.data?.data.length === 0
+  ) {
     return (
       <div className="flex justify-center items-center">
         <p>No items data available or error in fetching data.</p>
@@ -55,11 +57,21 @@ function ItemsTable({ search }) {
         <table className="w-full text-sm text-left text-gray-500 dark:text-gray-400 bg-white dark:bg-darkblack-600">
           <thead className="text-xs text-gray-700 uppercase bg-[#dde4eb] dark:bg-gray-700 dark:text-gray-400">
             <tr>
-              <th scope="col" className="py-3 pl-4">SL</th>
-              <th scope="col" className="py-3">Product Name</th>
-              <th scope="col" className="py-3">Total Quantity</th>
-              <th scope="col" className="py-3">Used Quantity</th>
-              <th scope="col" className="py-3">Unused Quantity</th>
+              <th scope="col" className="py-3 pl-4">
+                SL
+              </th>
+              <th scope="col" className="py-3">
+                Product Name
+              </th>
+              <th scope="col" className="py-3">
+                Total Quantity
+              </th>
+              <th scope="col" className="py-3">
+                Used Quantity
+              </th>
+              <th scope="col" className="py-3">
+                Unused Quantity
+              </th>
             </tr>
           </thead>
           <tbody>
@@ -67,7 +79,9 @@ function ItemsTable({ search }) {
               <tr
                 key={index}
                 className={`hover:bg-gray-200 dark:hover:bg-gray-600 cursor-pointer ${
-                  index % 2 === 0 ? "bg-gray-50 dark:bg-gray-800" : "bg-white dark:bg-gray-900"
+                  index % 2 === 0
+                    ? "bg-gray-50 dark:bg-gray-800"
+                    : "bg-white dark:bg-gray-900"
                 }`}
               >
                 <td className="py-2 px-6 font-medium text-gray-900 dark:text-gray-200">
@@ -92,7 +106,8 @@ function ItemsTable({ search }) {
               </tr>
             ))}
             {/* If no data found */}
-            {(!itemsData_state?.data?.data || itemsData_state.data?.data.length === 0) && (
+            {(!itemsData_state?.data?.data ||
+              itemsData_state.data?.data.length === 0) && (
               <tr>
                 <td colSpan="5" className="text-center py-3 px-6 text-gray-500">
                   No items data found!
@@ -101,7 +116,6 @@ function ItemsTable({ search }) {
             )}
           </tbody>
         </table>
-        
       </div>
       <div className="my-8">
         <div className="flex flex-col md:flex-row justify-between items-center gap-4 md:gap-6">
@@ -123,7 +137,6 @@ function ItemsTable({ search }) {
                     value={number}
                     className="text-black"
                     style={{ fontSize: "12px" }}
-                    onClick={() => ""}
                   >
                     {number}
                   </AutocompleteItem>
@@ -137,17 +150,11 @@ function ItemsTable({ search }) {
                 type="text"
                 className="border border-gray-300 bg-white dark:bg-darkblack-600 rounded px-2 py-1 w-12 md:w-16 text-center text-gray-600"
                 placeholder="1"
-                value={""}
-                onChange={""}
+                defaultValue={inputPage}
               />
 
               {inputPage && (
-                <Button
-                  onClick={""}
-                  color="primary"
-                  variant="faded"
-                  size="sm"
-                >
+                <Button color="primary" variant="faded" size="sm">
                   Go ≫
                 </Button>
               )}
@@ -161,9 +168,8 @@ function ItemsTable({ search }) {
               showControls
               showShadow
               color="primary"
-              page={ 5}
+              page={5}
               total={5}
-              onChange={(page) =>""}
               className="overflow-x-auto"
             />
           </div>
@@ -188,7 +194,6 @@ function ItemsTable({ search }) {
                       value={number}
                       className="text-black"
                       style={{ fontSize: "12px" }}
-                      onClick={() =>""}
                     >
                       {number}
                     </AutocompleteItem>
@@ -203,16 +208,11 @@ function ItemsTable({ search }) {
                   className="border border-gray-300 bg-white dark:bg-darkblack-600 rounded px-2 py-1 w-12 md:w-16 text-center text-gray-600"
                   placeholder="1"
                   value={inputPage}
-                  onChange={() => ""}
+                  onChange={(e) => setInputPage(e.target.value)} // Handle input change
                 />
 
                 {inputPage && (
-                  <Button
-                    onClick={""}
-                    color="primary"
-                    variant="faded"
-                    size="sm"
-                  >
+                  <Button color="primary" variant="faded" size="sm">
                     Go ≫
                   </Button>
                 )}
@@ -221,7 +221,6 @@ function ItemsTable({ search }) {
           </div>
         </div>
       </div>
-    
     </div>
   );
 }

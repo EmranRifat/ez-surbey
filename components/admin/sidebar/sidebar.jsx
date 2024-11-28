@@ -6,7 +6,7 @@ import Link from "next/link";
 import { cn } from "@nextui-org/react";
 import { sectionItemsWithTeams } from "./sidebar-items";
 import Image from "next/image";
-import { useRequisitionWithPendingCount } from "lib/hooks/admin/requisition/useRequisitionWithPendingCount";
+// import { useRequisitionWithPendingCount } from "lib/hooks/admin/requisition/useRequisitionWithPendingCount";
 
 function CustomSidebar({ children }) {
   const [isCollapsed, setIsCollapsed] = useState(false);
@@ -21,8 +21,7 @@ function CustomSidebar({ children }) {
   const pageSize = 10;
   const page = 1;
   const search = "";
-  const { countPendingRequisition, refetch_requisitions } =
-    useRequisitionWithPendingCount(page, pageSize, search);
+  // const { countPendingRequisition, refetch_requisitions } =useRequisitionWithPendingCount(page, pageSize, search);
 
 
 

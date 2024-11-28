@@ -71,10 +71,10 @@ function DayListTable({
   ];
 
   return (
-    <div className="overflow-x-auto">
-      <div className="relative shadow-md sm:rounded-lg bg-white dark:bg-darkblack-600">
-        <table className="w-full min-w-[1200px] text-sm border text-left text-gray-500 dark:text-gray-400 bg-white dark:bg-darkblack-600">
-          <thead className="text-gray-700 bg-[#dde4eb] dark:bg-gray-700 dark:text-white">
+    <div className="overflow-x-auto rounded-lg shadow-lg">
+      <div className="relative shadow-md sm:rounded-lg bg-white dark:bg-darkblack-600 ">
+        <table className="w-full min-w-[1200px] text-sm   border text-left text-gray-500 dark:text-gray-400  bg-white dark:bg-darkblack-600">
+          <thead className="text-gray-700 bg-[#dde4eb] dark:bg-gray-700 dark:text-white ">
             <tr>
               {tableHeaders.map((header, idx) => (
                 <th key={idx} scope="col" className="py-1 px-3">

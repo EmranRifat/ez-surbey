@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { useRouter } from "next/router"; // Import useRouter
+import { useRouter } from "next/router";
 import HeaderOne from "components/admin/header/HeaderOne";
 import Provider from "components/provider";
 import Overlay from "components/admin/overlay";
@@ -41,7 +41,7 @@ function AdminLayout({ bg, overlay, children }) {
   if (isLoading) {
     return (
       <div className="flex items-center justify-center h-screen">
-        <p>Loading...</p>
+        <div className="animate-spin rounded-full h-32 w-32 border-t-4 border-blue-500"></div>
       </div>
     );
   }
@@ -59,19 +59,12 @@ function AdminLayout({ bg, overlay, children }) {
         </div>
 
         {/* Main Content Section */}
-        <div
-          className={`flex-1 transition-all`}
-          style={{ width: "75%", important: true }}
-        >
+        <div className="flex-1 transition-all w-full sm:w-3/4 lg:w-1/2">
           {/* Overlay */}
           {overlay ? overlay : <Overlay />}
 
           {/* Dashboard Content */}
-          <div
-            className={`body-wrapper ${
-              bg || "dark:bg-darkblack-500 bg-[#FAFAFA]"
-            }`}
-          >
+          <div className={`body-wrapper ${bg || "dark:bg-darkblack-500 bg-[#FAFAFA]"}`}>
             {children}
           </div>
         </div>

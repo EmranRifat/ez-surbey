@@ -1,87 +1,8 @@
 import React from "react";
-import {
-  Autocomplete,
-  AutocompleteItem,
-  Button,
-  Pagination,
-} from "@nextui-org/react";
-import { useState } from "react";
-import { Spinner } from "@nextui-org/react";
-import cookies from "js-cookie";
-import { useAllInventoryPerson } from "../../../lib/hooks/admin/inventory/fetchInventoryPerson";
 
-function PersonTable({search}) {
-  const [page, setPage] = useState(1);
-  const [pageSize, setPageSize] = useState(15);
-  const [selectedValue, setSelectedValue] = useState(pageSize.toString());
-  const [inputPage, setInputPage] = useState("");
 
-  const token = cookies.get("access");
-  const numbers = ["10", "20", "30", "40", "50", "60", "70", "80", "90", "100"];
+function PersonTable({ persons, haspersonsData, page, pageSize}) {
 
-  const {
-    isFetched: is_personData_fetched,
-    data: personData_state,
-    error: personData_state_error,
-    isLoading: personData_state_loading,
-    isFetching: personData_state_fetching,
-    refetch: refetch_personData,
-  } = useAllInventoryPerson(token, page, pageSize, search);
-
-  console.log("personData table==>>", personData_state?.data);
-
-  const persons = personData_state?.data?.data;
-  const haspersonsData = persons && persons.length > 0;
-  const current_page = personData_state?.data?.current_page;
-
-  const shouldShowPagination =
-    !personData_state_loading && (persons?.length > 0 ?? false);
-
-  console.log("paginated personData===>", personData_state?.data?.total_pages);
-
-  const handleInputPageChange = (e) => {
-    setInputPage(e.target.value);
-  };
-  const handleGoToPage = () => {
-    const pageNumber = parseInt(inputPage, 10);
-
-    if (
-      !isNaN(pageNumber) &&
-      pageNumber > 0 &&
-      pageNumber <= personData_state?.data?.total_pages
-    ) {
-      setCurrentPage(pageNumber);
-    }
-  };
-
-  // // const currentPage = personData_state?.current_page
-  const setCurrentPage = (page_number) => {
-    setPage(page_number);
-    refetch_personData();
-  };
-
-  const handleValueChange = (value) => {
-    setSelectedValue(value);
-    setPageSize(parseInt(value, 10));
-    setPage(1);
-    refetch_personData();
-  };
-
-  if (personData_state_error) {
-    return (
-      <div className="text-red-600">
-        Error: {personData_state_error?.message}
-      </div>
-    );
-  }
-
-  if (personData_state_loading || personData_state_fetching) {
-    return (
-      <div className="flex justify-center items-center">
-        <Spinner />
-      </div>
-    );
-  }
 
   return (
     <div className="overflow-x-auto relative shadow-md sm:rounded-lg bg-white dark:bg-darkblack-600">
@@ -162,32 +83,14 @@ function PersonTable({search}) {
           </tr>
           {/* Subheader row for P, U, B */}
           <tr className="border-b bg-[#218d9ead] text-center border-gray-400 dark:border-gray-600">
-            {[...Array(8)].map((_, index) => (
-              // console.log("index===>  ", index),
-              <>
-                <th
-                  key={`P-${index}`}
-                  scope="col"
-                  className="py-1 px-4 text-center border border-gray-300 dark:border-gray-600"
-                >
-                  P
-                </th>
-                <th
-                  key={`U-${index}`}
-                  scope="col"
-                  className="py-1 px-4 text-center border border-gray-300 dark:border-gray-600"
-                >
-                  U
-                </th>
-                <th
-                  key={`B-${index}`}
-                  scope="col"
-                  className="py-1 px-4 text-center border border-gray-300 dark:border-gray-600"
-                >
-                  B
-                </th>
-              </>
-            ))}
+          {[...Array(8)].map((_, index) => (
+          <>
+            <th key={`P-${index}`} scope="col" className="py-1 px-4 text-center border border-gray-300 dark:border-gray-600">P</th>
+            <th key={`U-${index}`} scope="col" className="py-1 px-4 text-center border border-gray-300 dark:border-gray-600">U</th>
+            <th key={`B-${index}`} scope="col" className="py-1 px-4 text-center border border-gray-300 dark:border-gray-600">B</th>
+          </>
+          ))}
+
           </tr>
         </thead>
 
@@ -297,9 +200,9 @@ function PersonTable({search}) {
           )}
         </tbody>
       </table>
-      <div className="my-8">
+
+      {/* <div className="my-8">
         <div className="flex flex-col md:flex-row justify-between items-center gap-4 md:gap-6">
-          {/* Left-aligned controls */}
           <div className="flex justify-start items-start gap-4">
             <div className="flex items-center">
               <Autocomplete
@@ -348,7 +251,6 @@ function PersonTable({search}) {
             </div>
           </div>
 
-          {/* Centered pagination */}
           <div className="flex justify-center items-center w-full md:w-auto mt-4 md:mt-0">
             <Pagination
               isCompact
@@ -362,7 +264,6 @@ function PersonTable({search}) {
             />
           </div>
 
-          {/*/////////// this part make for center pagination so keep invsible */}
 
           <div className="invisible">
             <div className="flex justify-start items-start gap-4">
@@ -414,7 +315,7 @@ function PersonTable({search}) {
             </div>
           </div>
         </div>
-      </div>
+      </div> */}
     </div>
   );
 }
