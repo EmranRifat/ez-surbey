@@ -20,7 +20,7 @@ const Map = ({ lat, lng }) => {
   };
 
   return (
-    <div style={{ height: "150px", width: "200px" }}>
+    <div style={{ height: "300px", width: "400px" }}>
       <GoogleMapReact
         bootstrapURLKeys={{
           key: process.env.GOOGLE_MAP_API_KEY,
