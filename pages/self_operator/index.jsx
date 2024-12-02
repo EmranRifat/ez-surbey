@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import Search from "components/admin/forms/Search";
+import Search from "components/common/Search";
 import Filter from "components/admin/forms/Filter";
 import { Autocomplete, AutocompleteItem, Button, Pagination } from "@nextui-org/react";
 import cookies from "js-cookie";

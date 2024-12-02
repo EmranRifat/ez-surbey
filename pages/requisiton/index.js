@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { debounce } from "lodash";
-import Search from "components/admin/forms/Search";
+import Search from "components/common/Search";
 import Cookies from "js-cookie";
 import {
   Autocomplete,
