@@ -103,7 +103,7 @@ const ShopDetail = () => {
   return (
     <>
       <div className="text-gray-700 p-4 my-4">
-        <h1 className="text-gray-300">Shop Details for new: {shopId}</h1>
+        {/* <h1 className="text-gray-300">Shop Details for new: {shopId}</h1> */}
 
         <div className="px-10 flex">
           <h1 className="font-semibold text-2xl text-[#3E75A6] my-4 text-center  py-1">
@@ -260,7 +260,7 @@ const ShopDetail = () => {
                         : shop?.group_shap_pointer_shop_pointer_selection === 3
                         ? "নগদ"
                         : shop?.group_shap_pointer_shop_pointer_selection === 4
-                        ? "রকেট"
+                        ? "রকেট" 
                         : "অন্যান্য"}
                     </span>
                   </h2>
@@ -378,7 +378,7 @@ const ShopDetail = () => {
                 </h2>
               )}
             </div>
-            <h2 className="font-semibold pl-10">client টেবিল স্টিকারের ছবি:</h2>
+            <h2 className="font-semibold pl-25">client টেবিল স্টিকারের ছবি:</h2>
             <DynamicImage image_id={id} image={tableStcker} />
           </div>
 

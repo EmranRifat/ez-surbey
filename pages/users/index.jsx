@@ -34,9 +34,10 @@ function Users() {
 
   } = useAllUsersData(token, search, page, pageSize);
 
-  console.log("Users_state !!!!!!!!!!!", Users_state?.data?.data);
+  console.log("Users_state !!!!!!!!!!!", Users_state?.data?.total_pages );
 
   const current_page = Users_state?.data?.current_page;
+  
   const handleInputPageChange = (e) => {
     setInputPage(e.target.value);
   };
@@ -63,8 +64,7 @@ function Users() {
     refetch_Users();
   };
 
-  const shouldShowPagination = !Users_state_loading && (Users_state?.data?.data?.length > 0 ?? false);
-
+  const shouldShowPagination = !Users_state_loading && (Users_state?.data?.data.length > 0 ?? false);
   
   
     useEffect(() => {
@@ -163,7 +163,7 @@ function Users() {
                 showShadow
                 color="primary"
                 page={current_page || 1}
-                total={current_page?.data?.total_pages || 5}
+                total={Users_state?.data?.total_pages || 5}
                 onChange={(page) => setCurrentPage(page)}
                 className="overflow-x-auto"
               />

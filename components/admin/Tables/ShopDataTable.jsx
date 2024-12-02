@@ -10,6 +10,12 @@ function ShopDataTable({ ShopData, isLoading, error, page, pageSize }) {
     window.open(`shopData/${shopId}`);
     
   };
+  const handleLocationClick = (e, latitude, longitude) => {
+    e.stopPropagation(); // Prevent row click event from firing
+    if (latitude && longitude) {
+      window.open(`https://www.google.com/maps?q=${latitude},${longitude}`, '_blank');
+    }
+  };
 
   if (isLoading) {
     return (
@@ -194,15 +200,17 @@ function ShopDataTable({ ShopData, isLoading, error, page, pageSize }) {
                         {shop.agentInfo || ""}
                       </span>
                     </td>
+                   
                     <td className="py-2 px-3 text-nowrap">
-                      {shop.shop_location_latitude !== null &&
-                      shop.shop_location_longitude !== null ? (
+                      {shop.shop_location_latitude !== null && shop.shop_location_longitude !== null ? (
                         <a
                           href={`https://www.google.com/maps?q=${shop.shop_location_latitude},${shop.shop_location_longitude}`}
                           target="_blank"
                           rel="noopener noreferrer"
+                          onClick={(e) => handleLocationClick(e, shop.shop_location_latitude, shop.shop_location_longitude)}
                         >
                           <Image
+                          
                             width={16}
                             height={16}
                             src="/location.svg"
@@ -213,6 +221,7 @@ function ShopDataTable({ ShopData, isLoading, error, page, pageSize }) {
                         "N/A"
                       )}
                     </td>
+                    
                     <td className="py-1 px-3 text-nowrap">
                       {shop.shopImage ? (
                         <img

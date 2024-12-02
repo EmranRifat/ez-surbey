@@ -26,7 +26,7 @@ function CustomSidebar({ children }) {
 
 
   return (
-    <div className="flex h-screen w-full ">
+    <div className="flex h-full w-full ">
       {/* Sidebar Container */}
       <aside
         className={cn(

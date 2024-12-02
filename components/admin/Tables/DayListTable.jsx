@@ -39,6 +39,13 @@ function DayListTable({
     return itemArray.includes(itemNo) ? 'Yes' : 'No';
   };
 
+  const handleRowClick = (shopId) => {
+    window.open(`dayList/${shopId}`);
+    
+  };
+
+
+
   // Define table headers in an array for better maintainability
   const tableHeaders = [
     "SL",
@@ -91,6 +98,7 @@ function DayListTable({
 
                 return (
                   <tr
+                  onClick={() => handleRowClick(dayData.id )}  
                     key={dayData.id || index}
                     className="hover:bg-gray-200 cursor-pointer"
                   >

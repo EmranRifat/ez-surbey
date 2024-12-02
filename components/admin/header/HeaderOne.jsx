@@ -55,7 +55,7 @@ function HeaderOne({ handleSidebar, showToggleButton }) {
   };
 
   return (
-    <header className="header-wrapper z-30 hidden w-full md:block bg-[#218d9e]">
+    <header className="header-wrapper z-30 hidden w-full md:block bg-[#3f668db0]">
       <div className=" flex  h-[70px] w-full justify-between items-center sticky  px-10 dark:bg-darkblack-400 2xl:px-[76px]">
         <div className="flex gap-4">
           <Link href="/">
